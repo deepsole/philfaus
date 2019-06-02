@@ -1,0 +1,77 @@
+<h1>Registration form</h1>
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onSaveDriver(postForm)" #postForm="ngForm" *ngIf="!isLoading">
+  <h4>Driver details</h4>
+  <mat-form-field>
+    <input matInput name="fname" [ngModel]="driver?.fname" type="text" placeholder="First Name" #fnameInput="ngModel" required>
+      <mat-error *ngIf="fnameInput.invalid">Please enter First Name.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput name="lname" [ngModel]="driver?.lname" type="text" placeholder="Last Name" #lnameInput="ngModel" required>
+      <mat-error *ngIf="lnameInput.invalid">Please enter Last Name.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput name="address" [ngModel]="driver?.address" type="text" placeholder="Address" #addressInput="ngModel" required>
+     <mat-error *ngIf="addressInput.invalid">Please enter a valid address.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+      <input matInput name="license" [ngModel]="driver?.license" type="text" placeholder="Driver's License" #licenseInput="ngModel" required>
+     <mat-error *ngIf="licenseInput.invalid">Please enter License Number.</mat-error>
+  </mat-form-field>
+
+
+  <mat-form-field>
+      <input matInput name="phone" [ngModel]="driver?.phone" type="number" placeholder="Phone Number" #phoneInput="ngModel" required>
+     <mat-error *ngIf="phoneInput.invalid">Please enter a Phone Number.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+      <input matInput name="amount" [ngModel]="driver?.amount" type="number" placeholder="Initial Deposit" #amountInput="ngModel" required>
+      <span matPrefix>₵&nbsp;</span>
+     <mat-error *ngIf="amountInput.invalid">Please enter amount.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+      <input matInput name="weekAmount" [ngModel]="driver?.weekAmount" type="number" placeholder="Weekly Deposit" #weekAmountInput="ngModel" required>
+      <span matPrefix>₵&nbsp;</span>
+     <mat-error *ngIf="weekAmountInput.invalid">Please enter an amount.</mat-error>
+  </mat-form-field>
+<br>
+<h4>Car Details</h4>
+  <mat-form-field>
+    <mat-label>Car Manufacturer</mat-label>
+    <mat-select [(ngModel)]="selectedValue" name="carMake" required>
+      <mat-option *ngFor="let carMake of cars" [value]="carMake.viewValue">
+        {{carMake.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+      <input matInput name="carModel" [ngModel]="driver?.carModel" type="text" placeholder="Car Model" #carModelInput="ngModel" required>
+     <mat-error *ngIf="carModelInput.invalid">Please enter the Car Model.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input name="carChasis" [ngModel]="driver?.carChasis" type="text" matInput placeholder="Car Chasis" #carChasisInput="ngModel" required>
+    <mat-error *ngIf="carChasisInput.invalid">Please enter the Car Chasis No.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input name="carReg" [ngModel]="driver?.carReg" type="text" matInput placeholder="Car Registration" #carRegInput="ngModel" required>
+    <mat-error *ngIf="carRegInput.invalid">Please enter the Car Registration No.</mat-error>
+  </mat-form-field>
+
+<mat-form-field>
+  <input name="date" matInput [matDatepicker]="picker3" placeholder="Registration Date" [(ngModel)]="myDate">
+  <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+  <mat-datepicker #picker3></mat-datepicker>
+</mat-form-field>
+
+
+
+  <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Register</button>
+  </form>
+</mat-card>

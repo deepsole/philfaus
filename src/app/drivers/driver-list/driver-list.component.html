@@ -1,0 +1,61 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi="true" *ngIf="drivers.length > 0 && !isLoading">
+
+
+<h3>ALL DRIVERS LIST</h3>
+<div class="container mybox">
+  <table class="table table-hover table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>#</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Driver's Address</th>
+        <th>Driver's Phone</th>
+        <th>Driver's License</th>
+        <th>Initial deposit</th>
+        <th>Weekly deposit</th>
+        <th>Car Manufacturer</th>
+        <th>Car Model</th>
+        <th>Car Chasis</th>
+        <th>Car Registration</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let driver of drivers">
+        <td></td>
+        <td>{{driver.fname}}</td>
+        <td>{{driver.lname}}</td>
+        <td>{{driver.address}}</td>
+        <td>{{driver.phone}}</td>
+        <td>{{driver.license}}</td>
+        <td>{{driver.amount}}</td>
+        <td>{{driver.weekAmount}}</td>
+        <td>{{driver.carMake}}</td>
+        <td>{{driver.carModel}}</td>
+        <td>{{driver.carChasis}}</td>
+        <td>{{driver.carReg}}</td>
+        <td>{{driver.date}}</td>
+        <mat-action-row *ngIf="userIsAuthenticated">
+        <a mat-button color="primary" [routerLink]="['/edit', driver.id]">EDIT</a>
+        <button mat-button color="warn" (click)="onDelete(driver.id)">DELETE</button>
+        </mat-action-row>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+</mat-accordion>
+<mat-paginator [length]="totalDrivers" [pageSize]="driversPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)" *ngIf="drivers.length > 0"></mat-paginator>
+<p class="info-text mat-body-1" *ngIf="drivers.length <=0 && !isLoading">No post added yet!</p>

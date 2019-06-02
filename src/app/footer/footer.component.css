@@ -1,0 +1,12 @@
+.page-footer {
+  color: rgb(226, 221, 212);
+  background-color: rgb(212, 44, 44);
+}
+
+footer {
+  height: 218px;
+}
+
+.link-style li a {
+  color: rgb(28, 37, 1)
+}

@@ -1,0 +1,22 @@
+<mat-card class="example-card">
+ <mat-card-content>
+<h3>Login here to access</h3>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <input matInput name="email" ngModel type="email" placeholder="E-mail" #emailInput="ngModel" required email>
+     <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input name="password" ngModel type="password" matInput placeholder="Password" #passwordInput="ngModel" required>
+    <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Login</button>
+  </form>
+  </mat-card-content>
+</mat-card>
+<p class="login-text"><strong>Only authorized users of Philfaus company limited are allowed to login.</strong></p>
+<p class="login-text">Click <a href="home">here</a> to return to the homepage</p>
+
+
+

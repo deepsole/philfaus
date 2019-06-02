@@ -1,0 +1,34 @@
+<mat-toolbar class="mynav" color="primary">
+<nav class="navbar">
+
+      <!-- logo -->
+      <div class="navbar-brand">
+        <a class="navbar-item">
+          <img src="assets/img/philfaus_logo.png">
+        </a>
+      </div>
+      <div class="display-3 displayed-3">PF PHILFAUS COMPANY LIMITED</div>
+    </nav>
+
+    <ul>
+        <li *ngIf="userIsAuthenticated">
+            <a mat-button routerLink="/create" routerLinkActive="mat-accent">New Driver</a>
+        </li>
+        <li *ngIf="!userIsAuthenticated">
+            <a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a>
+        </li>
+
+
+
+        <li *ngIf="userIsAuthenticated">
+            <button mat-button (click)="onLogout()">Logout</button>
+        </li>
+    </ul>
+
+</mat-toolbar>
+
+    <div *ngIf="userIsAuthenticated">
+            <a class="btn btn-secondary btn-sm" mat-button routerLink="/signup" routerLinkActive="mat-accent">Register a New User</a>
+    </div>
+
+
