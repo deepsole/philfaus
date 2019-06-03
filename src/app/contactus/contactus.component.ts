@@ -1,50 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { ContactService} from './contact.service';
-import { Subscription } from 'rxjs';
-import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
-
-import { Contact } from './contact.model';
+import { ContactService } from './contact.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-contactus',
   templateUrl: './contactus.component.html',
   styleUrls: ['./contactus.component.css']
+
 })
 export class ContactusComponent implements OnInit {
-  isLoading = false;
-  private mode = 'create';
-  contact: Contact;
+  angForm: FormGroup;
 
-  constructor(public contactService: ContactService, public http: ContactService ) { }
+  constructor(
+    // private flashMessages: FlashMessagesService,
+    private fb: FormBuilder,
+    private contactService: ContactService) {
+    this.createForm();
+  }
 
+  createForm() {
+    this.angForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      message: ['', Validators.required],
+    });
+  }
+  sendMail(name, email, message) {
+    console.log('????');
+    this.contactService.sendMail(name, email, message).subscribe(success => {
+      console.log('????' + success);
+      console.log(success);
+    }, error => {
+      console.log('Something went wrong');
+    });
+  }
   ngOnInit() {
   }
-
-
-
-
-register(form: NgForm) {
-    if (form.invalid) {
-      return;
-    }
-    this.isLoading = true;
-    if (this.mode === 'create') {
-    const contact: Contact  = {
-      name: form.value.name,
-      phone: form.value.phone,
-      email: form.value.email,
-      message: form.value.message,
-    };
-    this.http.sendEmail('http://localhost:3000/sendmail', contact).subscribe(
-      data => {
-        const res: any = data;
-        console.log('You have sent a email');
-      }
-    );
-  }
-
-}
-
 
 }
 
